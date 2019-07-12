@@ -1,0 +1,42 @@
+{
+  "name": "quick-credit-react-frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start-dev": "webpack --hot"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/successgilli/Quick-Credit-React-Frontend.git"
+  },
+  "author": "Gilbert Awaji-mitop N.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/successgilli/Quick-Credit-React-Frontend/issues"
+  },
+  "homepage": "https://github.com/successgilli/Quick-Credit-React-Frontend#readme",
+  "dependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-redux": "^7.1.0",
+    "react-router-dom": "^5.0.1",
+    "redux": "^4.0.4"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.5.0",
+    "@babel/core": "^7.5.4",
+    "@babel/plugin-proposal-class-properties": "^7.5.0",
+    "@babel/preset-env": "^7.5.4",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.0.0",
+    "file-loader": "^4.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.35.3",
+    "webpack-cli": "^3.3.5",
+    "webpack-dev-server": "^3.7.2"
+  }
+}
