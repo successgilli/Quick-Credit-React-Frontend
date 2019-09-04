@@ -6,11 +6,14 @@ module.exports = {
     output: {
         path: path.resolve(__dirname,'./public'),
         filename: 'bundle.js',
+        sourceMapFilename: 'bundle.map'
     },
+    devtool: '#source-map',
     module: {
         rules: [
             {
                 test: /\.jsx$/,
+                exclude: /(node_modules)/,
                 use: 'babel-loader'
             },
             {
