@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './app.jsx';
 import User from './components/user.jsx';
+import Routes from './Routes.jsx';
 import { Provider } from 'react-redux';
 import store from './store.jsx';
 import { connect } from 'redux';
@@ -23,7 +24,9 @@ class Index extends React.Component{
             )
         } else if (this.state.page === 'user') {
                 return(
-                    <User/>
+                    <Router>
+                        <Routes />
+                    </Router>
                 )
         }
         

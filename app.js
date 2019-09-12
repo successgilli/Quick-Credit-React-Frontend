@@ -12,6 +12,6 @@ app.get('*', (request, response) => {
   response.sendFile(path.resolve(__dirname, 'public', 'index.html'));
 });
 
-app.listen(process.env.PORT || 3000, () => {
+app.listen(process.env.PORT || 2000, () => {
   debug('listening on port 3000');
 });
