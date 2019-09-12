@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import CalculatorHome from './calculatorHome.jsx';
 import fetch from 'isomorphic-fetch';
 import Modal from './modal.jsx';
-import '../css/UserLoan.css';
+import '../css/userLoan.css';
 
 const UserLoan = () => {
     const [showm, setShow] = useState(true);
