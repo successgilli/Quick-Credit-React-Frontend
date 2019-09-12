@@ -15,7 +15,6 @@ class Aside extends React.Component{
                 <a key = {index}>{eachLink}</a>
             );
         });
-        console.log(links, ' links')
         return(
             <section className = {this.props.asideClass}>
                 <div id="logoSpace">

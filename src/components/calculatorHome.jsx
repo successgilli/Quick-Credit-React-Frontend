@@ -11,14 +11,16 @@ class Calculator extends React.Component{
             monthlyRepayment: '₦ 10,000.00',
             interest: "₦ 500.00",
             repaymentDate: 'May 28, 2009',
-            tenore: '1 Month(s)'
+            tenore: '1 Month(s)',
+            tenor1: 1,
+            amount1: 10000,
         }
     }
     
     render(){
         return(
-            <div className="CalculatedValues">                 
-                <div className="calculatedFromForm">
+            <div className="CalculatedValues">            
+                <div className={this.props.classname || "calculatedFromForm"}>
                     <h3> Loan Calculator</h3>
                     <div className="calcinput">
                         <div>
@@ -84,7 +86,7 @@ class Calculator extends React.Component{
                             <span>{this.state.totalRepayment}</span>
                         </div>
                     </div>
-                    <button id="homeCalcApplyBtn" onClick = {this.handleClickSignup}>APPLY NOW</button>
+                    <button id="homeCalcApplyBtn" onClick = { (this.props.do ? () => this.props.do(this.state) : this.handleClickSignup)}>APPLY NOW</button>
                 </div>
             </div>
         )
@@ -112,7 +114,9 @@ class Calculator extends React.Component{
             monthlyRepayment: '₦' +this.toMoneyString(monthlyMoney),
             amount: '₦' + this.amount.current.options[this.amount.current.options.selectedIndex].value,
             tenore: this.tenor.current.options[this.tenor.current.options.selectedIndex].value + ' Month(s)',
-            repaymentDate: newDate.toDateString()
+            repaymentDate: newDate.toDateString(),
+            amount1: this.getMoneyValue(amount.options[amount.options.selectedIndex].value),
+            tenor1: Number(tenor.options[tenor.options.selectedIndex].value)
         })
     }
     handleTenorChange = (e) => {
@@ -133,7 +137,9 @@ class Calculator extends React.Component{
             monthlyRepayment: '₦' +this.toMoneyString(monthlyMoney),
             amount: '₦' + amount.options[amount.options.selectedIndex].value,
             tenore: tenor.options[tenor.options.selectedIndex].value + ' Month(s)',
-            repaymentDate: newDate.toDateString()
+            repaymentDate: newDate.toDateString(),
+            amount1: this.getMoneyValue(amount.options[amount.options.selectedIndex].value),
+            tenor1: Number(tenor.options[tenor.options.selectedIndex].value)
         })
     }
     getMoneyValue = (money) => {

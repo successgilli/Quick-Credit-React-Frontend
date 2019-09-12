@@ -1,0 +1,78 @@
+#modal-background{
+    width: 150%;
+    position: fixed;
+    z-index: 1000;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+#modal-backgroundShow{
+    width: 100%;
+    position: fixed;
+    z-index: 1000;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.btn{
+    width: 50%;
+    height: 40px;
+    background-color: inherit;
+    border: 2px solid indigo;
+    font-weight: 900;
+    text-transform: capitalize;
+    outline: 0;
+    border-radius: 5px;
+    transition: 0.3s ease;
+}
+
+.btn:hover{
+    cursor: pointer;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+#modal-applyContent{
+    position: relative;
+    top: -10px;
+    box-shadow: 2px 2px 2px 4px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    padding: 10px;
+    min-height: 150px;
+    background-color: #ECEEE8;
+}
+#modal-outerClose {
+    right: -35px;
+    top: -10px;
+    position: absolute;
+    width: 50px;
+    cursor: pointer;
+}
+#modal-close{
+    
+    transform-origin: center center;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotate(45deg);
+    transition: 0.5s ease;
+    border: 1px solid grey;
+    z-index: 610;
+    outline: 0;
+    background-color: white;
+}
+#modal-applyContent>span:hover #modal-close{
+    border: 1px solid indigo;
+    height: 30px;
+    width: 30px;
+    font-size: 28px;
+    transform: rotate(135deg);
+}

@@ -9,7 +9,7 @@ main{
     width: 100%;
     position: fixed;
     height: 100%;
-    display: none;
+    display: block;
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.3);
