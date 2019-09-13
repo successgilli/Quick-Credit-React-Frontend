@@ -1,4 +1,6 @@
 import fetch from 'isomorphic-fetch';
+import { Redirect } from 'react-router-dom';
+
 
 export const signinUser = (data) => async dispatch => {
     console.log(data);
@@ -22,6 +24,53 @@ export const signinUser = (data) => async dispatch => {
     dispatch({type: 'LOGIN_USER', payload: userData});
     return;
 }
+
+export const userDetails = () => async dispatch => {
+    const url = 'https://quickcreditgilli.herokuapp.com/api/v1/users';
+    const request = new Request(url, {
+      method: 'GET',
+      headers: new Headers({
+        'Content-type': 'application/json',
+        Authorization: localStorage.getItem('auth'),
+        Accept: 'application/json,text/plain,*/*',
+      }),
+    });
+    fetch(request).then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        throw Error(res.statusText);
+      }).then((obj) => {
+        console.log(obj.data);
+        dispatch({type: 'LOGIN_USER', payload: obj.data})
+      }).catch((err) => {
+        console.log(err.message == 'Unauthorized', ' userToken');
+        if (err.message == 'Unauthorized') {
+          dispatch({ type: 'INVALID_TOKEN'});
+          localStorage.removeItem('page');
+          window.location.reload();
+        }
+      });
+}
+
+export const imageUpload = (image) => async dispatch => {
+    const url = 'https://quickcreditgilli.herokuapp.com/api/v1/users/uploads';
+    const formData = new FormData();
+    formData.append('image', image);
+    console.log(formData);
+    const request = new Request(url, {
+        method: 'PATCH',
+        headers: new Headers({ Authorization: localStorage.getItem('auth') }),
+        body: formData,
+    });
+
+fetch(request).then(res => res.json())
+    .then((obj) => {
+    console.log(obj.data, 'dat');
+    dispatch({type: 'UPDATE_PROFILE_PICTURE', payload: obj.data});
+    });
+}
+
 
 export const signuser = (credentials) => async dispatch => {
     console.log(credentials);

@@ -1,7 +1,7 @@
 import React from 'react';
 import Input from './input.jsx';
 import { connect } from 'react-redux';
-import {signinUser} from '../redux/actions/user.js'
+import {signinUser} from '../redux/actions/user.jsx'
 import '../css/index.css';
 import 'regenerator-runtime';
 

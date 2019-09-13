@@ -2,7 +2,7 @@ import React from 'react';
 import '../css/index.css';
 import Tab from './forTab.jsx';
 import Login from './login.jsx';
-import { signuser } from '../redux/actions/user';
+import { signuser } from '../redux/actions/user.jsx';
 import 'regenerator-runtime';
 
 import { connect } from 'react-redux';
