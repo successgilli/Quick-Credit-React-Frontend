@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import '../css/userDashbord.css';
 
 class Aside extends React.Component{
@@ -9,6 +11,7 @@ class Aside extends React.Component{
         }
     }
     render(){
+        const { handleUserRoute } = this.props;
         console.log(this.props.children);
         const links = this.props.children.map((eachLink, index) => {
             return (
@@ -18,11 +21,11 @@ class Aside extends React.Component{
         return(
             <section className = {this.props.asideClass}>
                 <div id="logoSpace">
-                    <a href="./index.html">
+                    <Link to="/" onClick={() => handleUserRoute(1)}>
                         <div className="logo" >
                             <span ><i className="fab fa-quora"></i>uick</span><span className="credit">Credit</span>
                         </div>
-                    </a>
+                    </Link>
                 </div>
                 {links}
             </section>

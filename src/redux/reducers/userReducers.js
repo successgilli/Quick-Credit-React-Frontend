@@ -17,7 +17,14 @@ export const user = (state = {}, action) => {
             return {
                 ...action.payload
             };
+        case actions.UPDATE_PROFILE_PICTURE:
+            console.log('hit')
+            return {
+                ...action.payload
+            };
         default:
+
+            console.log('here! ', action)
             return state;
     }
 };
@@ -32,7 +39,8 @@ export const error = (state = {}, action) => {
         case actions.CLEAR_LOGIN_ERROR:
             return {
                 ...state,
-                loginerror: ''
+                loginerror: '',
+                invalidToken: ''
             };
         case actions.SIGNUP_ERROR:
                 return {
@@ -42,8 +50,14 @@ export const error = (state = {}, action) => {
         case actions.CLEAR_SIGNIN_ERROR:
             return {
                 ...state,
-                signinerror: ''
+                signinerror: '',
+                invalidToken: ''
             };
+        case actions.INVALID_TOKEN:
+            return {
+                ...state,
+                invalidToken: 'bad or no token'
+            }
         default:
             return state;
     }
