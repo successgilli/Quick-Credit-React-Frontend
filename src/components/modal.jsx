@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { modalCall } from '../redux/actions/user.jsx';
 import '../css/modal.css';
 
-const Modal = ({ show, btnText, displayText, handleClick, click }) => {
+const Modal = ({ show, btnText, displayText, handleClick, click, modal, modalCall, page }) => {
     const [ close, setClose ] = useState(show);
 
     const handleCloseClick = () => {
-        click();
+        modalCall({show: true});
+       if(page === 2) click();
     }
 
     return (
@@ -23,4 +26,4 @@ const Modal = ({ show, btnText, displayText, handleClick, click }) => {
     )
 }
 
-export default Modal;
+export default connect(state => state, { modalCall } )(Modal);
