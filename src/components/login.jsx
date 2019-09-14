@@ -85,7 +85,6 @@ class Login extends React.Component{
             email: this.state.email,
             password: this.state.password
         });
-        if(error !== 'error') setTimeout(() => {this.props.loginUser('user');}, 1000);
     }
 }
 

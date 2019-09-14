@@ -16,13 +16,22 @@ export const signinUser = (data) => async dispatch => {
        dispatch({type: 'REMOVE_LOGIN'});
        return 'error';
     }
-    console.log(request);
+    console.log(request.data.isAdmin, 'requst log');
     dispatch({type: 'CHANGE_LOGIN'});
     dispatch({type: 'CLEAR_LOGIN_ERROR'});
     const { token, ...userData} = request.data;
     localStorage.setItem('auth', token);
     dispatch({type: 'LOGIN_USER', payload: userData});
+    setTimeout(() => {
+      localStorage.setItem('page', (request.data.isAdmin) ? 'admin' : 'user');
+      window.location.reload();
+    }, 1000);
     return;
+}
+
+export const modalCall = (payload) => async dispatch => {
+
+ dispatch({ type: 'CALL_MODAL', payload});
 }
 
 export const userDetails = () => async dispatch => {

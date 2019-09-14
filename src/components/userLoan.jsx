@@ -58,7 +58,7 @@ const UserLoan = () => {
 
     return (
         <section id="userLoanApply">
-            <Modal show={showm} btnText={btnText} displayText={text} click={() => setShow(true)} handleClick={ btnText === 'Ok' ? closeRes : applyClick} />
+            <Modal show={showm} btnText={btnText} displayText={text} click={() => setShow(true)} handleClick={ btnText === 'Ok' ? closeRes : applyClick} page={2} />
         <CalculatorHome do = {(calState) => handleCalculatorClick(calState)} classname="calculatedFromFormUser" />
     </section>
     )

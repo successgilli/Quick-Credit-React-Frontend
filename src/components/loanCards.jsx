@@ -1,6 +1,11 @@
 import React from 'react';
 
+import LoanApplicationCard from "./LoanApplicationCard.jsx";
+
 class LoanCard extends React.Component {
+    acceptCard = React.createRef();
+    reject = React.createRef();
+
     constructor(props){
         super(props);
         this.state = {
@@ -11,30 +16,35 @@ class LoanCard extends React.Component {
         };
     }
 
-    handleClicked = () => {
-
-        if(!this.state.isFetched){
-            console.log('entered');
-        const url = `https://quickcreditgilli.herokuapp.com/api/v1/loans/${this.state.loanid}/repayments`;
-        const request = new Request(url, {
-          method: 'GET',
-          headers: new Headers({ 'Content-type': 'application/json', Authorization: localStorage.getItem('auth'), Accept: 'application/json,text/plain,*/*' }),
-        });
-        fetch(request).then((res) => {
-          if (res.ok) {
-            return res.json();
-          }
-        }).then((obj) => {
-          let empty = false;
-          if (obj.data.length === 0) {
-            empty = true;
-          }
-          this.setState({isFetched: true});
-          console.log(obj.data);
-          this.setState({ repayments: obj.data })
-        }).catch(err => console.log(err));
+    handleClicked = (e) => {
+        const { type } = this.props;
+        if (type !== 'dashboard') {
+            if(!this.state.isFetched){
+                console.log('entered');
+            const url = `https://quickcreditgilli.herokuapp.com/api/v1/loans/${this.state.loanid}/repayments`;
+            const request = new Request(url, {
+              method: 'GET',
+              headers: new Headers({ 'Content-type': 'application/json', Authorization: localStorage.getItem('auth'), Accept: 'application/json,text/plain,*/*' }),
+            });
+            fetch(request).then((res) => {
+              if (res.ok) {
+                return res.json();
+              }
+            }).then((obj) => {
+              let empty = false;
+              if (obj.data.length === 0) {
+                empty = true;
+              }
+              this.setState({isFetched: true});
+              console.log(obj.data);
+              this.setState({ repayments: obj.data })
+            }).catch(err => console.log(err));
+            }
+            this.props.toggleOpen(this.state.loanid);
         }
-        this.props.toggleOpen(this.state.loanid);
+        if (type === 'dashboard') if (e.target !== this.acceptCard.current.lastChild.lastChild.firstChild && e.target !== this.acceptCard.current.lastChild.lastChild.lastChild) this.props.toggleOpen(this.state.loanid);
+
+        
     }
 
     handleStatus = (status) => {
@@ -50,7 +60,34 @@ class LoanCard extends React.Component {
         }
     }
 
+    handleRenderInfo = (repayments, type) => {
+        console.log(this.props, ' propd');
+        const { loan, removeLoan } = this.props;
+        if(type === 'dashboard'){
+            return (
+                <div ref={this.acceptCard}>
+                    <LoanApplicationCard loan={loan} removeLoan={removeLoan} />
+                </div>
+            )
+        }
+        return (
+            <div>
+                <div className="repaywidehead">
+                    <div className="repayHeads"><p className="repayHeads3">Date paid</p></div>
+                    <div className="repayHeads"><p className="repayHeads3">Amount paid</p></div>
+                    <div className="repayHeads"><p className="repayHeads3">Monthly installments</p></div>
+                    <div className="repayHeads"><p className="repayHeads3">loan amount</p></div>
+                    <div className="repayHeads"><p className="repayHeads3">balance</p></div>
+                </div>
+                    {
+                        this.state.repayments.length === 0 ? <p className="pt">No repayments for this loan</p> : repayments
+                    }
+            </div>
+        )
+    }
+
     render() {
+        const { type } = this.props; 
         const repayments = this.state.repayments.map(eachRepayment => (
             <div className="repayDetails">
                 <div className="repayHeads"><p className="repayHeads1">Date paid</p><p className="repayHeads2">{eachRepayment.createdon.split('T')[0]}</p></div>
@@ -71,17 +108,8 @@ class LoanCard extends React.Component {
                     <div className="tableHeads"><p className="tableHeads1">Status</p><p className="tableHeads2">{this.props.loan.status}</p></div>
                 </div>
                 <div className={(this.props.clickedCard === this.state.loanid) ? "moreInfoShow" : "moreInfo" }>
-                    <p>Repayment History for This Loan</p>
-                    <div className="repaywidehead">
-                        <div className="repayHeads"><p className="repayHeads3">Date paid</p></div>
-                        <div className="repayHeads"><p className="repayHeads3">Amount paid</p></div>
-                        <div className="repayHeads"><p className="repayHeads3">Monthly installments</p></div>
-                        <div className="repayHeads"><p className="repayHeads3">loan amount</p></div>
-                        <div className="repayHeads"><p className="repayHeads3">balance</p></div>
-                    </div>
-                    {
-                        this.state.repayments.length === 0 ? <p>No repayments for this loan</p> : repayments
-                    }
+                    <p>{ type === 'dashboard' ? 'Loan info' : 'Repayment History for This Loan'}</p>
+                    { this.handleRenderInfo(repayments, type)}
                 </div>
             </div>
         )

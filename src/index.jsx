@@ -22,14 +22,13 @@ class Index extends React.Component{
             return(
                 <App changePage = {this.handleChangePage}/>
             )
-        } else if (this.state.page === 'user') {
-                return(
-                    <Router>
-                        <Routes />
-                    </Router>
-                )
-        }
+        } 
         
+        return(
+            <Router>
+                <Routes />
+            </Router>
+        )
     }
     handleChangePage = (val) => {
         this.setState({

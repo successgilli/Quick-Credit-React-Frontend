@@ -29,6 +29,15 @@ export const user = (state = {}, action) => {
     }
 };
 
+export const modal = (state = { show: true }, action) => {
+    switch(action.type){
+        case actions.CALL_MODAL:
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
 export const error = (state = {}, action) => {
     switch(action.type){
         case actions.LOGIN_ERROR:

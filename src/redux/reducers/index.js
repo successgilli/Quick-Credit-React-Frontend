@@ -1,7 +1,8 @@
-import { isLoggedIn, user, error } from './userReducers';
+import { isLoggedIn, user, error, modal } from './userReducers';
 
 export default {
     isLoggedIn,
     user,
-    error
+    error,
+    modal
 };
