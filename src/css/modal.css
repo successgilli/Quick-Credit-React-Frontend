@@ -9,9 +9,11 @@
     background-color: rgba(0, 0, 0, 0.3);
 }
 #modal-backgroundShow{
-    width: 100%;
+    min-width: 100%;
+    top: 0;
+    left: 0;
     position: fixed;
-    z-index: 1000;
+    z-index: 9000;
     height: 100%;
     display: flex;
     justify-content: center;

@@ -13,14 +13,11 @@ const UserLoan = () => {
     const handleCalculatorClick = (calcState) => {
         getLoan(calcState);
         setBtntext('apply');
-        console.log(calcState, 'dhh');
-        console.log(showm, ' show')
         setShow(false);
         setText(`Do you want to apply for the loan of ${calcState.amount} for the period of ${calcState.tenore} ?`);
     }
 
     const apply = ({amount1, tenor1}) => {
-        console.log(amount1, ' ', tenor1);
         const amount = String(amount1);
         const tenor = String(tenor1);
         const url = 'https://quickcreditgilli.herokuapp.com/api/v1/loans/';
@@ -45,8 +42,6 @@ const UserLoan = () => {
             setBtntext('Ok');
             setText(`application for the amount ₦ ${obj.data.amount} was successful`);
           }).catch((err) => {
-            console.log('dhit')
-            console.log(err);
             setShow(false);
             setBtntext('Ok');
             setText(err.message);

@@ -20,7 +20,6 @@ class LoanCard extends React.Component {
         const { type } = this.props;
         if (type !== 'dashboard') {
             if(!this.state.isFetched){
-                console.log('entered');
             const url = `https://quickcreditgilli.herokuapp.com/api/v1/loans/${this.state.loanid}/repayments`;
             const request = new Request(url, {
               method: 'GET',
@@ -36,7 +35,6 @@ class LoanCard extends React.Component {
                 empty = true;
               }
               this.setState({isFetched: true});
-              console.log(obj.data);
               this.setState({ repayments: obj.data })
             }).catch(err => console.log(err));
             }
@@ -61,7 +59,6 @@ class LoanCard extends React.Component {
     }
 
     handleRenderInfo = (repayments, type) => {
-        console.log(this.props, ' propd');
         const { loan, removeLoan } = this.props;
         if(type === 'dashboard'){
             return (

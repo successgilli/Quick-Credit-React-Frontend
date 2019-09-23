@@ -12,6 +12,7 @@ import UserLoan from './userLoan.jsx';
 import Modal from './modal.jsx';
 import UserProfile from './userProfile.jsx';
 import { userDetails } from '../redux/actions/user.jsx';
+import { checkToken } from '../redux/actions/user.jsx';
 import AdminDashboard from './adminDashboard.jsx';
 
 class User extends React.Component{
@@ -26,7 +27,8 @@ class User extends React.Component{
 
     componentDidMount(){
         const { userDetails } = this.props;
-        localStorage.getItem('page') === 'user' && userDetails() ;
+        localStorage.getItem('page') === 'user' && userDetails();
+        localStorage.getItem('page') === 'admin' && checkToken();
     }
 
     render(){
@@ -70,7 +72,8 @@ class User extends React.Component{
     }
 
     handleLogout = () => {
-        const items = ['auth', 'page'];
+        const items = ['auth'];
+        // localStorage.setItem('page', 'index');
         items.forEach(item => localStorage.removeItem(item));
         window.location.reload();
     }
@@ -89,7 +92,6 @@ class User extends React.Component{
         }
     }
     handleUserRoute = (pageNumber) => {
-        console.log(pageNumber, ' num');
         this.setState({ asideClass: 'asideClose', userMainContainer: 'userMainContainer', page: pageNumber});
     }
 }

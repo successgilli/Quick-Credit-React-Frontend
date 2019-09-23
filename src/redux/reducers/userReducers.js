@@ -4,6 +4,8 @@ export const isLoggedIn = (state= 'false', action) =>{
     switch(action.type){
         case actions.CHANGE_LOGIN:
             return 'true';
+        case actions.LOADING:
+            return 'loading';
         case actions.REMOVE_LOGIN:
             return 'false';
         default:
@@ -18,13 +20,10 @@ export const user = (state = {}, action) => {
                 ...action.payload
             };
         case actions.UPDATE_PROFILE_PICTURE:
-            console.log('hit')
             return {
                 ...action.payload
             };
         default:
-
-            console.log('here! ', action)
             return state;
     }
 };

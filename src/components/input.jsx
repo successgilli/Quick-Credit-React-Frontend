@@ -42,7 +42,6 @@ class Input extends React.Component{
                 [e.target.name]: e.target.value
             }
         })
-        console.log(this.state, 'lolo')
         this.props.getVals(this.state.vals);
     }
     handleValidate = (element) => {   

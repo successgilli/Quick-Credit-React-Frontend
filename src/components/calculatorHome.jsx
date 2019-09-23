@@ -120,7 +120,6 @@ class Calculator extends React.Component{
         })
     }
     handleTenorChange = (e) => {
-        console.log(this.props, ' props');
         const amount = this.amount.current;
         const tenor = this.tenor.current;
         let currentDate = new Date();

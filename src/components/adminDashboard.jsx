@@ -57,7 +57,6 @@ class AdminDashboard extends React.Component{
           }
           throw Error(res.statusText);
         }).then((obj) => {
-          console.log(obj);
           if(obj.data) {
             this.setState({
                 loans: obj.data
@@ -71,9 +70,8 @@ class AdminDashboard extends React.Component{
     }
 
     handleClick = (e) => {
-        console.log(e.target);
-        console.log('clicked');
     }
+
     removeLoan = (id) => {
         const { loans } = this.state;
         const newLoans = loans.filter( loan => id !== loan.id);
