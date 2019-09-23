@@ -20,14 +20,11 @@ const LoanApplicationCard = ({ loan, modalCall, removeLoan }) => {
             return res.json();
           }
           return res.json();
-          console.log(res.json(), ' body');
-          // throw Error(res.statusText); console.log(this.state, ' steta');
         }).then((obj) => {
             if (obj.status >= 400) {
                 modalCall({show: false, btnText: 'Close', displayText: `${obj.error}`, handleClick: () =>  modalCall({show: true})});
                 return;
             }
-            console.log(obj.data);
             modalCall(
                 {
                     show: false, 
@@ -40,7 +37,6 @@ const LoanApplicationCard = ({ loan, modalCall, removeLoan }) => {
             );
             removeLoan(obj.data.loanId);
         }).catch(err => {
-            console.log(err);
             modalCall({show: false, btnText: 'Close', displayText: `${err.message}`, handleClick: () =>  modalCall({show: true})})
         })
     }

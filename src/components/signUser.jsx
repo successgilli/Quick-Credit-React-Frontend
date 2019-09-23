@@ -1,5 +1,6 @@
 import React from 'react';
 import '../css/index.css';
+import '../css/loader.css';
 import Tab from './forTab.jsx';
 import Login from './login.jsx';
 import { signuser } from '../redux/actions/user.jsx';
@@ -56,6 +57,7 @@ class UserSign extends React.Component{
     }
   }
     render(){
+        const { isLoggedIn } = this.props;
         return(
             <div id="backgroundSignUser" className={this.props.signBackground}>
                 <div id="signHead" className={this.props.signHead}>
@@ -117,7 +119,14 @@ class UserSign extends React.Component{
                         <hr></hr>
                         <div id="btns">
                             <button className={this.state.prevBtnClass} onClick ={this.handleClickPrev}> PREVIOUS</button>
-                            <button id="signupBtn" className={this.state.submitBtnClass} onClick={this.handleSubmit}> SUBMIT</button>
+                           {
+                               (isLoggedIn !== 'loading') &&  <button id="signupBtn" className={this.state.submitBtnClass} onClick={this.handleSubmit}> SUBMIT</button>
+                           }
+                            {
+                                (isLoggedIn === 'loading') && <button className="loadDiv">
+                                    <div className="loader"></div>
+                                </button>
+                            }
                             <button className={this.state.nextBtnClass} onClick = {this.handleClickNext}> NEXT</button>
                         </div>
                     </form>
@@ -127,7 +136,6 @@ class UserSign extends React.Component{
     }
     getval = (name, value) => {
         this.setState({[name]:value})
-        console.log('set ',name, ' ', value)
     }
     bringSignValues = (state) => {
         const initialVals = this.state.signVals;
@@ -138,10 +146,7 @@ class UserSign extends React.Component{
             }
         })
     }
-    // dispatchAc = () => {
-    //     console.log('clicked')
-    //     this.props.dispatch({type: 'CHANGE_LOGIN'})
-    // }
+
     handleSubmit = async (e) => {
         e.preventDefault();
         const credentiaals = {
@@ -158,7 +163,6 @@ class UserSign extends React.Component{
             bvn: this.state.bvn,
             accountNumber: this.state.accountNumber
         }
-        console.log(credentiaals, 'credentials');
         if(this.state.completed.length === 12){
             this.setState({ show: 'hide' });
             const error = await this.props.signuser(credentiaals);
@@ -167,6 +171,7 @@ class UserSign extends React.Component{
             this.setState({ show: 'errorRes' });
         }
     }
+
     handleclose = () => {
         this.props.handleUserBackground('signBackgroundHide')
         this.props.handleUserForm('signcontentHide', 'signheadHide');
@@ -177,7 +182,6 @@ class UserSign extends React.Component{
     handleLogin = (e) => {
       e.preventDefault();
       this.props.loginUser('user');
-      console.log(this.props)
     }
     handleToggleSignup = () => {
         this.props.handleToggleForm('loginHide', 'signupShow', 'SIGN UP');
@@ -212,7 +216,6 @@ class UserSign extends React.Component{
             }
             return item;
         })
-        console.log(newstate)
         this.setState({
             formTabs: newstate
         })
@@ -239,7 +242,6 @@ class UserSign extends React.Component{
             });
             return {left: item.left+520}
         })
-        console.log(newstate)
         this.setState({
             formTabs: newstate
         })
@@ -257,7 +259,6 @@ class UserSign extends React.Component{
         }, 10)
     }
     handleTabError = (err, comp) => {
-        console.log(err,'tru')
         const error = this.state.error;
         const found = error.find(item => item === err);
         if (typeof found === 'undefined'){
@@ -278,13 +279,10 @@ class UserSign extends React.Component{
         this.setState({error, completed})
     }
     componentDidUpdate(){
-        console.log(this.state, 'newest');
     }
     handleClickNavigation = (e) => {
         if(e.target === this.first.current) {
             if(this.state.error.length !== 0) return;
-            console.log(e.target)
-            console.log(this.third.current.className)
                 const navfront = ['firstNav','','',''];
             this.setState({
                 formTabs: [{left: 0},{left: 520},{left: 1040},{left: 1560}
@@ -294,7 +292,6 @@ class UserSign extends React.Component{
         } else if (e.target === this.second.current) {
             if(this.state.error.length !== 0) return;
             if(!(this.state.navClass[1] === 'navigatorOpen')) return
-            console.log(e.target)
             const navfront = ['','firstNav','',''];
             this.setState({
                 formTabs: [{left: -520},{left: 0},{left: 520},{left: 1040}

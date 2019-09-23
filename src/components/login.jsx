@@ -3,6 +3,7 @@ import Input from './input.jsx';
 import { connect } from 'react-redux';
 import {signinUser} from '../redux/actions/user.jsx'
 import '../css/index.css';
+import '../css/loader.css';
 import 'regenerator-runtime';
 
 class Login extends React.Component{
@@ -22,6 +23,7 @@ class Login extends React.Component{
           }
     }
     render(){
+        const { isLoggedIn } = this.props;
         return(
             <form action = "" id="loginForm" className={this.props.classname}>
                 <div id={(this.props.isLoggedIn === 'true') ? 'successDiv' : 'successDivHide'}>successfully signedIn !</div>
@@ -38,7 +40,14 @@ class Login extends React.Component{
                 <div className="errorRes2">{(this.props.error.loginerror) ? this.props.error.loginerror.email:''}</div>
                 <div className="errorRes2">{(this.props.error.loginerror) ? this.props.error.loginerror.password:''}</div>
                 <div className="errorRes2">{ (typeof this.props.error.loginerror==='string') ? this.props.error.loginerror:''}</div>
-                <button id="signinBtn" onClick = {this.handleLogin}> LOG IN</button>
+                {
+                    (isLoggedIn !== 'loading') &&  <button id="signinBtn" onClick = {this.handleLogin}> LOG IN</button>
+                }
+                {
+                    (isLoggedIn === 'loading') && <button className="loadDiv">
+                        <div className="loader"></div>
+                    </button>
+                }
             </form>
         )
     }
@@ -53,13 +62,10 @@ class Login extends React.Component{
     }
     getval = (name, value) => {
         this.setState({[name]:value})
-        console.log('set ',name, ' ', value)
     }
     componentDidUpdate(){
-        console.log(this.state, ' lolo');
     }
     handleTabError = (err, comp) => {
-        console.log(err,'tru')
         const error = this.state.error;
         const found = error.find(item => item === err);
         if (typeof found === 'undefined'){

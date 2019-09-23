@@ -1,0 +1,33 @@
+.loader{
+    width: 15px;
+    height: 15px;
+    padding: 0px;
+    margin: 0px;
+    margin: auto;
+    display: block;
+    cursor: wait;
+    border-radius: 50%;
+    border: 3px solid white;
+    border-color: transparent white transparent white;
+    animation: spin 1s infinite linear;
+}
+.loadDiv{
+    margin: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 120px;
+    display: block;
+    cursor: wait;
+    background-color:#f57921;
+    color: white;
+    outline: 0;
+    border: 0;
+    border-radius: 5px;
+    transition: 0.4s ease;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}

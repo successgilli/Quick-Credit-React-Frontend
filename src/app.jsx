@@ -17,7 +17,6 @@ class App extends React.Component{
         }
     }
     render(){
-        console.log(this.props, 'this')
         return(
             <div>
                 <HomeHeader handleUserForm = {this.handleUserForm}

@@ -12,7 +12,6 @@ class Aside extends React.Component{
     }
     render(){
         const { handleUserRoute } = this.props;
-        console.log(this.props.children);
         const links = this.props.children.props.children.map((eachLink, index) => {
             return (
                 <a key = {index}>{eachLink}</a>

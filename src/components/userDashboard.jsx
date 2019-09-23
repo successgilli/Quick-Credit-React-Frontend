@@ -56,7 +56,6 @@ class UserDashboard extends React.Component{
           }
           throw Error(res.statusText);
         }).then((obj) => {
-          console.log(obj);
           if(obj.data) {
             this.setState({
                 loans: obj.data
@@ -70,8 +69,6 @@ class UserDashboard extends React.Component{
     }
 
     handleClick = (e) => {
-        console.log(e.target);
-        console.log('clicked');
     }
 
     controlCardToggle = (loanid) => {

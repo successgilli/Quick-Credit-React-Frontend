@@ -17,7 +17,6 @@ class Index extends React.Component{
         }
     }
     render(){
-        console.log(this.state.page)
         if (this.state.page === 'index') {
             return(
                 <App changePage = {this.handleChangePage}/>
@@ -35,10 +34,8 @@ class Index extends React.Component{
             page:val
         })
         localStorage.setItem('page', val);
-        console.log('satte changed')
     }
     componentDidUpdate(){
-        console.log('changed')
     }
 }
 
